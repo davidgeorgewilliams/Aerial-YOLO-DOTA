@@ -1,7 +1,7 @@
+from tqdm import tqdm
 import os
 import cv2
 import argparse
-from tqdm import tqdm
 
 # Set up argument parser
 parser = argparse.ArgumentParser(description='Convert DOTA labels to YOLO format.')
@@ -20,14 +20,44 @@ if not os.path.isdir(data_root):
 
 # Define paths
 image_dir = os.path.join(data_root, "images")
-label_dir = os.path.join(data_root, "labels")
-yolo_label_dir = os.path.join(data_root, "yolo_labels")
+dota_label_dir = os.path.join(data_root, "dota_labels")
+yolo_label_dir = os.path.join(data_root, "labels")
 
 # Ensure the YOLO label directory exists
 os.makedirs(yolo_label_dir, exist_ok=True)
 
 
 def convert_dota_to_yolo(dota_label_path, image_path, output_path):
+    """
+    Convert DOTA dataset annotations to YOLO format.
+
+    This function reads DOTA format annotations, processes them, and converts
+    them to YOLO format. It handles the conversion of rotated bounding boxes
+    to axis-aligned bounding boxes and normalizes the coordinates.
+
+    Args:
+        dota_label_path (str): Path to the input DOTA format label file.
+        image_path (str): Path to the corresponding image file.
+        output_path (str): Path where the converted YOLO format label will be saved.
+
+    Returns:
+        None
+
+    Raises:
+        ValueError: If a line in the DOTA label file has insufficient parts or
+                    if an unknown object class is encountered.
+
+    Notes:
+        - The function skips the first two lines of the DOTA label file (imagesource and gsd).
+        - It calculates the center, width, and height of the bounding box and normalizes them.
+        - Coordinates that fall outside the image boundaries are warned about and skipped.
+        - The YOLO format output is: <class_id> <center_x> <center_y> <width> <height>,
+          where all values are normalized to [0, 1].
+
+    Warning:
+        This function assumes that the DOTA labels use absolute pixel coordinates.
+        Ensure that the image dimensions match the coordinate system used in annotations.
+    """
     # Read image dimensions
     img = cv2.imread(image_path)
     if img is None:
@@ -87,6 +117,14 @@ def convert_dota_to_yolo(dota_label_path, image_path, output_path):
         if class_id == -1:
             raise ValueError(f"Unknown class {class_name}")
 
+        if 0 <= center_x <= 1 and 0 <= center_y <= 1 and 0 < width <= 1 and 0 < height <= 1:
+            yolo_line = f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}\n"
+            yolo_lines.append(yolo_line)
+        else:
+            print(f"Warning: Invalid normalized coordinates for"
+                  f" {image_path}: {center_x}, {center_y}, {width}, {height}")
+            continue
+
         # Create YOLO format line
         yolo_line = f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}\n"
         yolo_lines.append(yolo_line)
@@ -97,11 +135,11 @@ def convert_dota_to_yolo(dota_label_path, image_path, output_path):
 
 
 # Get the total number of label files
-total_files = sum(1 for file in os.listdir(label_dir) if file.endswith(".txt"))
+total_files = sum(1 for file in os.listdir(dota_label_dir) if file.endswith(".txt"))
 
 # Convert all labels with progress bar
 with tqdm(total=total_files, desc="Converting labels", unit="file") as pbar:
-    for label_file in os.listdir(label_dir):
+    for label_file in os.listdir(dota_label_dir):
         if label_file.endswith(".txt"):
             image_file = label_file.replace(".txt", ".png")
 
@@ -110,7 +148,7 @@ with tqdm(total=total_files, desc="Converting labels", unit="file") as pbar:
 
             # Convert DOTA labels to YOLO format
             convert_dota_to_yolo(
-                os.path.join(label_dir, label_file),
+                os.path.join(dota_label_dir, label_file),
                 os.path.join(image_dir, image_file),
                 os.path.join(yolo_label_dir, label_file))
 

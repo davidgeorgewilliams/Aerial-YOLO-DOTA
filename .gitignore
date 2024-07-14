@@ -4,6 +4,9 @@
 # PyTorch files
 *.pt
 
+# YOLO results
+**/runs/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,10 +1,14 @@
-# Dataset path
-path: /Volumes/Portable/dota  # Root directory of the dataset
+# Root directory of the dataset
+path: /home/ubuntu/dota
 
 # Images and Labels
-train: images  # Path to all images
-val: images    # Same as train, YOLO will split automatically
-labels: yolo_labels  # Path to YOLO format labels
+train:
+  - images/train  # Relative path to training images
+  - labels/train  # Relative path to training labels
+
+val:
+  - images/val  # Relative path to validation images
+  - labels/val  # Relative path to validation labels
 
 # Classes
 names:
@@ -27,3 +31,9 @@ names:
 
 # Number of classes
 nc: 16
+
+# Training hyperparameters
+base_batch_size: 16
+base_lr: 0.01
+epochs: 250
+save_period: 1
