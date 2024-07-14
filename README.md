@@ -4,6 +4,8 @@ Aerial-YOLO-DOTA: Advanced Object Detection for Aerial Imagery
 
 This repository showcases state-of-the-art object detection in aerial and satellite imagery using YOLOv9 on the DOTA (Dataset for Object Detection in Aerial Images) v1.5 dataset. 
 
+![Aerial-YOLO-DOTA.jpg](docs/Aerial-YOLO-DOTA.jpg)
+
 Key Features:
 
 - Implement YOLOv9 for efficient, accurate detection of small objects in large-scale aerial images
