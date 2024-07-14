@@ -1,18 +1,12 @@
+from helpers import *
 from tqdm import tqdm
 import os
 import cv2
 import argparse
 
-# Set up argument parser
-parser = argparse.ArgumentParser(description='Convert DOTA labels to YOLO format.')
-parser.add_argument('--data_root', type=str, required=True,
-                    help='Root directory of the DOTA dataset')
-
-# Parse arguments
-args = parser.parse_args()
-
-# Use the parsed data_root
-data_root = args.data_root
+# Read configuration from YAML file
+config = read_yaml_config("dota.yaml")
+data_root = config["path"]
 
 # Validate the data root
 if not os.path.isdir(data_root):
@@ -124,10 +118,6 @@ def convert_dota_to_yolo(dota_label_path, image_path, output_path):
             print(f"Warning: Invalid normalized coordinates for"
                   f" {image_path}: {center_x}, {center_y}, {width}, {height}")
             continue
-
-        # Create YOLO format line
-        yolo_line = f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}\n"
-        yolo_lines.append(yolo_line)
 
     # Write YOLO format labels
     with open(output_path, "w") as f:

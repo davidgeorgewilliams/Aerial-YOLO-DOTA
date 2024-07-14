@@ -91,4 +91,3 @@ def create_train_val_splits(yaml_path, train_ratio=0.8):
 # The split is based on available labeled data to ensure all
 # training and validation samples have corresponding labels.
 create_train_val_splits("dota.yaml", train_ratio=0.8)
-
