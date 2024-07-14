@@ -85,8 +85,7 @@ def convert_dota_to_yolo(dota_label_path, image_path, output_path):
         # Get class ID
         class_id = class_mapping.get(class_name, -1)
         if class_id == -1:
-            print(f"Warning: Unknown class {class_name}")
-            continue
+            raise ValueError(f"Unknown class {class_name}")
 
         # Create YOLO format line
         yolo_line = f"{class_id} {center_x:.6f} {center_y:.6f} {width:.6f} {height:.6f}\n"

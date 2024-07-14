@@ -1,0 +1,29 @@
+# Dataset path
+path: /Volumes/Portable/dota  # Root directory of the dataset
+
+# Images and Labels
+train: images  # Path to all images
+val: images    # Same as train, YOLO will split automatically
+labels: yolo_labels  # Path to YOLO format labels
+
+# Classes
+names:
+  0: baseball-diamond
+  1: basketball-court
+  2: bridge
+  3: container-crane
+  4: ground-track-field
+  5: harbor
+  6: helicopter
+  7: large-vehicle
+  8: plane
+  9: roundabout
+  10: ship
+  11: small-vehicle
+  12: soccer-ball-field
+  13: storage-tank
+  14: swimming-pool
+  15: tennis-court
+
+# Number of classes
+nc: 16
