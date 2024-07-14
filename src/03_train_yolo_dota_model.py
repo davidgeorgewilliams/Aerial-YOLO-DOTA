@@ -1,7 +1,9 @@
-from helpers import read_yaml_config
-from ultralytics import YOLO
 import math
+
 import torch
+from ultralytics import YOLO
+
+from helpers import read_yaml_config
 
 # Detect GPUs
 num_gpus = torch.cuda.device_count()
@@ -41,11 +43,11 @@ results = model.train(
     epochs=epochs,
     save_period=save_period,
     imgsz=640,
-    workers=8 * num_gpus,      # Scale number of workers
-    batch=scaled_batch_size,   # Scaled batch size
-    lr0=scaled_lr,             # Scaled learning rate
-    device=device,             # Use all available GPUs
-    val=True,                  # Run validation
-    plots=True,                # Generate plots
-    verbose=True               # Use verbose training
+    workers=8 * num_gpus,  # Scale number of workers
+    batch=scaled_batch_size,  # Scaled batch size
+    lr0=scaled_lr,  # Scaled learning rate
+    device=device,  # Use all available GPUs
+    val=True,  # Run validation
+    plots=True,  # Generate plots
+    verbose=True  # Use verbose training
 )

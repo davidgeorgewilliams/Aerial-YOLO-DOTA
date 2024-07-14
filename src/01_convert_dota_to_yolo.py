@@ -1,8 +1,9 @@
-from helpers import *
-from tqdm import tqdm
 import os
+
 import cv2
-import argparse
+from tqdm import tqdm
+
+from helpers import read_yaml_config
 
 # Read configuration from YAML file
 config = read_yaml_config("dota.yaml")

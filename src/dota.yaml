@@ -1,5 +1,5 @@
 # Root directory of the dataset
-path: /home/ubuntu/dota
+path: /Volumes/Portable/dota
 
 # Images and Labels
 train:
