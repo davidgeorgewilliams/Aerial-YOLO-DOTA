@@ -58,7 +58,7 @@ Change directory into `src`:
 ```shell
 cd src
 ```
-Our scripts assume you are running from within the src directory. 
+Our scripts assume you are running from within the `src` directory. 
 All subsequent commands should be executed from this location.
 
 Convert DOTA labels to YOLO format:
