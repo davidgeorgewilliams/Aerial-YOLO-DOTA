@@ -366,11 +366,11 @@ This aerial image demonstrates several key strengths of your object detection mo
 
 Additional use cases highlight the versatility of our model across various domains:
 
-Commercial environments (trucks in delivery facilities):
+Commercial environments (trucks in delivery facilities)
 
 ![P0015.png](examples/P0015.png)
 
-Aviation (aircraft detection):
+Aviation (aircraft detection)
 
 ![P0024.png](examples/P0024.png)
 
