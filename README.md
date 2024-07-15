@@ -374,11 +374,11 @@ Aviation (aircraft detection)
 
 ![P0024.png](examples/P0024.png)
 
-Suburban settings (pools, vehicles)
+Suburban settings (swimming pools, vehicles)
 
 ![P0059.png](examples/P0059.png)
 
-Rural areas (tennis courts, pools)
+Rural areas (tennis courts, swimming pools)
 
 ![P2581.png](examples/P2581.png)
 
