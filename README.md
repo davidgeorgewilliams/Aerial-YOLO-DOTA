@@ -19,6 +19,8 @@ We have prepared an easy-to-use consolidated [DOTA v1.5](https://captain-whu.git
 including labels suitable for use with [YOLOv9](https://docs.ultralytics.com/models/yolov9/). This dataset is 
 available on our [Google Drive](https://drive.google.com/file/d/13fAWtcBEvLfUkQgUkHvcqWxI1HZNOin6/view?usp=sharing).
 
+![instances-DOTA.jpg](docs/instances-DOTA.jpg)]
+
 ## Repository Structure
 
 ```plaintext
